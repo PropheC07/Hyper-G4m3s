@@ -1,27 +1,519 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Unblocked LAN Games Portal</title>
-    <style>
-        body { background: #121212; color: #fff; font-family: sans-serif; text-align: center; padding: 50px; }
-        h1 { color: #00ffcc; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 800px; margin: 40px auto; }
-        .card { background: #1e1e1e; padding: 20px; border-radius: 8px; border: 2px solid #333; text-decoration: none; color: #fff; transition: 0.2s; }
-        .card:hover { border-color: #00ffcc; transform: translateY(-5px); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hyper G4m3s</title>
+  <meta name="theme-color" content="#090914">
+
+  <style>
+    :root {
+      --bg: #090914;
+      --panel: #131326;
+      --purple: #9b5cff;
+      --blue: #36d9ff;
+      --text: #f5f3ff;
+      --muted: #a5a3bd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 50% 0%, #28104a 0%, transparent 48%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, Arial, sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 7%;
+      background: #090914eF;
+      border-bottom: 1px solid #302044;
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--purple);
+      text-shadow: 0 0 20px #9b5cff88;
+    }
+
+    .tag {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    main {
+      max-width: 1250px;
+      padding: 35px 22px 65px;
+      margin: auto;
+    }
+
+    .hero {
+      padding: 45px 10px 30px;
+      text-align: center;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid #60408d;
+      background: #9b5cff18;
+      border-radius: 30px;
+      color: #cba8ff;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -3px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, #b77aff, #45dcff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin: 15px auto 26px;
+    }
+
+    .search-wrap {
+      max-width: 590px;
+      margin: auto;
+    }
+
+    #search {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 14px;
+      border: 1px solid #41305d;
+      outline: none;
+      background: #141326;
+      color: white;
+      font-size: 16px;
+      transition: border .2s, box-shadow .2s;
+    }
+
+    #search:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 20px #9b5cff22;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 25px 0 18px;
+    }
+
+    h2 {
+      font-size: 21px;
+      margin: 0;
+    }
+
+    #count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .game {
+      overflow: hidden;
+      background: linear-gradient(145deg, #19182f, #10101e);
+      border: 1px solid #292541;
+      border-radius: 18px;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .game:hover {
+      transform: translateY(-5px);
+      border-color: var(--purple);
+    }
+
+    .cover {
+      height: 145px;
+      display: grid;
+      place-items: center;
+      font-size: 58px;
+      background:
+        radial-gradient(circle at 50% 100%, #9b5cff35, transparent 65%),
+        #17152a;
+    }
+
+    .game-info {
+      padding: 16px;
+    }
+
+    .game-info h3 {
+      margin: 0 0 7px;
+      font-size: 17px;
+    }
+
+    .game-info p {
+      min-height: 36px;
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .play {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(100deg, #9250ee, #5865f2);
+      color: white;
+      font-size: 14px;
+      font-weight: 750;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .play:hover {
+      filter: brightness(1.15);
+    }
+
+    .empty {
+      display: none;
+      padding: 45px 10px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer {
+      padding: 25px;
+      border-top: 1px solid #292541;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* Game player popup */
+    #player {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      padding: 15px;
+      background: #05050bf2;
+    }
+
+    #player.active {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .player-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .player-bar strong {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .player-actions button {
+      padding: 10px 14px;
+      border: 1px solid #51406c;
+      border-radius: 9px;
+      background: var(--panel);
+      color: white;
+      cursor: pointer;
+    }
+
+    #game-frame {
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+      border: 1px solid #39304c;
+      border-radius: 12px;
+      background: white;
+    }
+
+    @media (max-width: 550px) {
+      header {
+        padding: 15px;
+      }
+
+      .tag {
+        display: none;
+      }
+
+      main {
+        padding: 20px 15px 45px;
+      }
+
+      .hero {
+        padding-top: 35px;
+      }
+
+      .games {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+      }
+
+      .cover {
+        height: 110px;
+        font-size: 43px;
+      }
+
+      .game-info {
+        padding: 12px;
+      }
+
+      .game-info h3 {
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>🎮 My Unblocked Games Portal</h1>
-    <p>Select a game below. Multiplayer games support instant LAN play!</p>
-    
-    <div class="grid">
-        <!-- Link directly to your local multiplayer game subfolder -->
-        <a href="lan-arena/index.html" class="card">
-            <h3>🌐 LAN Square Arena</h3>
-            <p>Real-time multiplayer square tag over Wi-Fi.</p>
-        </a>
+  <header>
+    <div class="logo">HYPER <span>G4M3S</span></div>
+    <div class="tag">YOUR NEXT GAME STARTS HERE</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="status">✦ THE ARCADE IS OPEN</div>
+      <h1>PLAY WITHOUT<br><span>LIMITS.</span></h1>
+      <p>Discover your next favourite game.</p>
+
+      <div class="search-wrap">
+        <input
+          id="search"
+          type="search"
+          placeholder="🔎 Search games..."
+          aria-label="Search games"
+        >
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>🎮 All Games</h2>
+        <span id="count"></span>
+      </div>
+
+      <div class="games" id="games"></div>
+      <div class="empty" id="empty">No games found. Try another search!</div>
+    </section>
+  </main>
+
+  <footer>
+    HYPER G4M3S © 2026 · Made for gamers
+  </footer>
+
+  <div id="player" role="dialog" aria-modal="true"
+       aria-label="Game player">
+    <div class="player-bar">
+      <strong id="game-title">Playing game</strong>
+      <div class="player-actions">
+        <button id="fullscreen">⛶ Fullscreen</button>
+        <button id="close">✕ Close</button>
+      </div>
     </div>
+    <iframe
+      id="game-frame"
+      title="Game window"
+      allow="fullscreen; autoplay; gamepad"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <script>
+    // ==========================================
+    // ADD YOUR GAMES HERE
+    // ==========================================
+    // Put each game in its own folder.
+    // Example: games/my-game/index.html
+
+    const gameList = [
+      {
+        name: "My First Game",
+        description: "Your first custom HTML game.",
+        icon: "🎮",
+        file: "games/my-game/index.html",
+        category: "Arcade"
+      },
+      {
+        name: "Space Adventure",
+        description: "Explore the galaxy.",
+        icon: "🚀",
+        file: "games/space/index.html",
+        category: "Adventure"
+      },
+      {
+        name: "Puzzle Master",
+        description: "Put your brain to the test.",
+        icon: "🧩",
+        file: "games/puzzle/index.html",
+        category: "Puzzle"
+      },
+      {
+        name: "Speed Racer",
+        description: "Race against the clock.",
+        icon: "🏎️",
+        file: "games/racing/index.html",
+        category: "Racing"
+      },
+      {
+        name: "Pixel Quest",
+        description: "Start a new pixel adventure.",
+        icon: "👾",
+        file: "games/pixel-quest/index.html",
+        category: "Adventure"
+      },
+      {
+        name: "Neon Breaker",
+        description: "Break your way to victory.",
+        icon: "⚡",
+        file: "games/neon-breaker/index.html",
+        category: "Arcade"
+      }
+    ];
+
+    const gamesContainer = document.getElementById("games");
+    const search = document.getElementById("search");
+    const count = document.getElementById("count");
+    const empty = document.getElementById("empty");
+    const player = document.getElementById("player");
+    const frame = document.getElementById("game-frame");
+    const gameTitle = document.getElementById("game-title");
+
+    function renderGames(query = "") {
+      const term = query.toLowerCase().trim();
+
+      const filtered = gameList.filter(game =>
+        `${game.name} ${game.description} ${game.category}`
+          .toLowerCase()
+          .includes(term)
+      );
+
+      gamesContainer.innerHTML = "";
+
+      filtered.forEach(game => {
+        const card = document.createElement("article");
+        card.className = "game";
+
+        const cover = document.createElement("div");
+        cover.className = "cover";
+        cover.textContent = game.icon;
+
+        const info = document.createElement("div");
+        info.className = "game-info";
+
+        const title = document.createElement("h3");
+        title.textContent = game.name;
+
+        const description = document.createElement("p");
+        description.textContent = game.description;
+
+        const button = document.createElement("button");
+        button.className = "play";
+        button.textContent = "▶ Play Now";
+        button.addEventListener("click", () => openGame(game));
+
+        info.append(title, description, button);
+        card.append(cover, info);
+        gamesContainer.appendChild(card);
+      });
+
+      count.textContent =
+        `${filtered.length} game${filtered.length === 1 ? "" : "s"}`;
+
+      empty.style.display = filtered.length ? "none" : "block";
+    }
+
+    function openGame(game) {
+      gameTitle.textContent = game.name;
+      frame.src = game.file;
+      player.classList.add("active");
+      document.body.style.overflow = "hidden";
+      document.getElementById("close").focus();
+    }
+
+    function closeGame() {
+      player.classList.remove("active");
+      frame.src = "about:blank";
+      document.body.style.overflow = "";
+    }
+
+    search.addEventListener("input", event => {
+      renderGames(event.target.value);
+    });
+
+    document.getElementById("close").addEventListener(
+      "click", closeGame
+    );
+
+    document.getElementById("fullscreen").addEventListener(
+      "click", async () => {
+        try {
+          if (!document.fullscreenElement) {
+            await frame.requestFullscreen();
+          } else {
+            await document.exitFullscreen();
+          }
+        } catch {
+          alert("Fullscreen is not available in this browser.");
+        }
+      }
+    );
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" &&
+          player.classList.contains("active") &&
+          !document.fullscreenElement) {
+        closeGame();
+      }
+    });
+
+    renderGames();
+  </script>
 </body>
 </html>
